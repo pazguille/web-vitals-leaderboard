@@ -29,7 +29,7 @@
         border-spacing: 0;
         border-collapse: collapse;
         border: 5px solid #444444;
-        margin: 0 auto;
+        margin: 30px auto;
         width: 50%;
       }
 
@@ -54,7 +54,6 @@
 
       td {
         padding: 1rem 1rem 1rem 2rem;
-        text-align: right;
         width: 50%;
       }
 
@@ -98,6 +97,12 @@
         border-top: 1px solid #f5f5f5;
       }
 
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+
     </style>
   </head>
   <body>
@@ -113,9 +118,7 @@
       <button id="reset" type="reset" name="action">🏳Reset</button>
     </form>
 
-    <hr/>
-
-    <table>
+    <table hidden>
       <thead>
         <tr>
           <th rowspan="2">Rank</th>
@@ -132,8 +135,6 @@
       </thead>
       <tbody id="content"></tbody>
     </table>
-
-    <hr/>
 
     <footer>
       <p><span class="heart">❤️</span>by <a href="https://twitter.com/pazguille" target="_blank" rel="noopener noreferrer">pazguille</a></p>
@@ -223,12 +224,13 @@
       const $reset = document.querySelector('#reset');
       const $form = document.querySelector('form');
       const $content = document.querySelector('#content');
-
+      const $table = document.querySelector('table');
       $form.addEventListener('submit', function(eve) {
         eve.preventDefault();
         if (eve.submitter.id === 'add') {
           urls.push($input.value);
           $content.insertAdjacentHTML('beforeend', skeletonTemplate($input.value));
+          $table.removeAttribute('hidden');
         } else if (eve.submitter.id === 'run') {
           const data = urls.map((url) => encodeURIComponent(url)).join(',');
           fetch(`https://crux.pazguille.me/api/web-vitals?urls=${data}`)
@@ -247,6 +249,7 @@
       $reset.addEventListener('click', () => {
         urls.length = 0;
         $content.innerHTML = '';
+        $table.setAttribute('hidden', 'hidden');
       });
     </script>
   </body>
