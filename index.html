@@ -140,6 +140,27 @@
     </footer>
 
     <script>
+      !function(){
+        var lastBtn = null
+        document.addEventListener('click',function(e){
+            if (!e.target.closest) return;
+            lastBtn = e.target.closest('button, input[type=submit]');
+        }, true);
+        document.addEventListener('submit', function(e){
+            if ('submitter' in e) return;
+            var canditates = [document.activeElement, lastBtn];
+            for (var i=0; i < canditates.length; i++) {
+                var candidate = canditates[i];
+                if (!candidate) continue;
+                if (!candidate.form) continue;
+                if (!candidate.matches('button, input[type=button], input[type=image]')) continue;
+                e.submitter = candidate;
+                return;
+            }
+            e.submitter = e.target.querySelector('button, input[type=button], input[type=image]')
+        }, true);
+      }();
+
       function template(site, position) {
         const fcp = site.metrics.FCP && (site.metrics.FCP.percentiles.p75/1000).toFixed(2) || '';
         const lcp = site.metrics.LCP && (site.metrics.LCP.percentiles.p75/1000).toFixed(2) || '';
@@ -158,9 +179,11 @@
 </tr>
 `);
       }
+
       function getLogo(url) {
         return `<img class="logo" width="32" src="${`https://www.google.com/s2/favicons?sz=48&domain_url=${new URL(url).origin}/`}" alt="${url}"/>`
       }
+
       function skeletonTemplate(url) {
         return (`
 <tr>
@@ -199,12 +222,13 @@
       const $input = document.querySelector('#url');
       const $reset = document.querySelector('#reset');
       const $form = document.querySelector('form');
+      const $content = document.querySelector('#content');
 
       $form.addEventListener('submit', function(eve) {
         eve.preventDefault();
         if (eve.submitter.id === 'add') {
           urls.push($input.value);
-          document.querySelector('#content').insertAdjacentHTML('beforeend', skeletonTemplate($input.value));
+          $content.insertAdjacentHTML('beforeend', skeletonTemplate($input.value));
         } else if (eve.submitter.id === 'run') {
           const data = urls.map((url) => encodeURIComponent(url)).join(',');
           fetch(`https://crux.pazguille.me/api/web-vitals?urls=${data}`)
@@ -213,8 +237,8 @@
               const html = results
                 .sort(sortBy('LCP'))
                 .map((result, index) => template(result, index+=1));
-                document.querySelector('#content').innerHTML = '';
-                document.querySelector('#content').insertAdjacentHTML('beforeend', html.join(''));
+                $content.innerHTML = '';
+                $content.insertAdjacentHTML('beforeend', html.join(''));
             });
         }
         $input.value = '';
@@ -222,7 +246,7 @@
 
       $reset.addEventListener('click', () => {
         urls.length = 0;
-        document.querySelector('#content').innerHTML = '';
+        $content.innerHTML = '';
       });
     </script>
   </body>
