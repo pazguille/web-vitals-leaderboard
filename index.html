@@ -163,10 +163,10 @@
       }();
 
       function template(site, position) {
-        const fcp = site.metrics.FCP && (site.metrics.FCP.percentiles.p75/1000).toFixed(2) || '';
-        const lcp = site.metrics.LCP && (site.metrics.LCP.percentiles.p75/1000).toFixed(2) || '';
-        const fid = site.metrics.FID && site.metrics.FID.percentiles.p75 || '';
-        const cls = site.metrics.CLS && site.metrics.CLS.percentiles.p75 || '';
+        const fcp = site.metrics.FCP && (site.metrics.FCP.value/1000).toFixed(2) || '';
+        const lcp = site.metrics.LCP && (site.metrics.LCP.value/1000).toFixed(2) || '';
+        const fid = site.metrics.FID && site.metrics.FID.value || '';
+        const cls = site.metrics.CLS && site.metrics.CLS.value || '';
 
         return (`
 <tr>
@@ -209,10 +209,10 @@
 
       function sortBy(metric) {
         return (a, b) => {
-          if (a.metrics[metric].percentiles.p75 < b.metrics[metric].percentiles.p75) {
+          if (a.metrics[metric].value < b.metrics[metric].value) {
             return -1;
           }
-          if (a.metrics[metric].percentiles.p75 > b.metrics[metric].percentiles.p75) {
+          if (a.metrics[metric].value > b.metrics[metric].value) {
             return 1;
           }
           return 0;
