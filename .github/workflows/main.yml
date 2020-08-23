@@ -11,9 +11,14 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
       - name: Install and Build 🔧
         run: |
-          npm install
+          npm ci
           npm run dist
 
       - name: Deploy 🚀
