@@ -182,7 +182,6 @@ function run(data) {
   const query = Object.keys(data).map(key => key + '=' + data[key]).join('&');
 
   return fetch(`https://crux.pazguille.me/api/web-vitals?${query}`)
-  // return fetch(`http://localhost:3030/api/web-vitals?${query}`)
     .then(res => res.json())
     .then((results) => {
 
@@ -242,3 +241,7 @@ if (params.has('competitors')) {
 } else {
   run({ urls: demoUrls });
 }
+
+window.addEventListener('load', () => {
+  document.querySelector('#twitter').src = 'https://platform.twitter.com/widgets/tweet_button.html?url=%0A%0A%F0%9F%93%8A%20https%3A%2F%2Fvitals-leaderboard.pazguille.me&text=%E2%9A%A1%EF%B8%8FWeb%20Vitals%20Leaderboard!%0A%0AThe%20simplest%20way%20to%20understand%20how%20your%20website%E2%80%99s%20performance%20compares%20to%20other%20sites%20in%20your%20industry.';
+});
