@@ -2,9 +2,11 @@ name: Build and Deploy
 on:
   pull_request:
     branches: master
+    types: [closed]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
