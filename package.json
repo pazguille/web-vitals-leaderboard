@@ -1,0 +1,30 @@
+{
+  "name": "web-vitals-leaderboard",
+  "version": "1.0.0",
+  "description": "The simplest way to understand how your site’s user experience compares to other major sites in your industry.",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve -p 3030",
+    "inline": "html-inline --ignore-images --ignore-links -i ./index.html -o ./dist/index.html",
+    "minify": "html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true --output ./dist/index.html ./dist/index.html",
+    "copy": "cp ./{loading.gif,favicon.svg,README.md,CNAME,LICENSE} ./dist",
+    "dist": "mkdir -p dist && npm run inline && npm run minify && npm run copy",
+    "deploy": "gh-pages --branch master --dist dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pazguille/web-vitals-leaderboard.git"
+  },
+  "author": "Guille Paz <guille87paz@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pazguille/web-vitals-leaderboard/issues"
+  },
+  "homepage": "https://vitals-leaderboard.pazguill.me",
+  "devDependencies": {
+    "gh-pages": "^3.1.0",
+    "html-inline": "^1.2.0",
+    "html-minifier-terser": "^5.1.1",
+    "serve": "^11.3.2"
+  }
+}
