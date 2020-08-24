@@ -8,7 +8,7 @@
     "inline": "html-inline --ignore-images --ignore-links --ignore-scripts -i ./index.html -o ./dist/index.html",
     "minify": "html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js '{\"compress\":{\"drop_console\":\"true\"},\"mangle\":{\"toplevel\":\"true\"}}' --output ./dist/index.html ./dist/index.html",
     "copy": "rm -rf dist && mkdir -p dist && cp -rf ./src ./dist/src",
-    "minify-js": "for filename in ./dist/src/js/*.js; do terser \"${filename}\" --compress --mangle --mangle-props --output \"${filename}\"; done",
+    "minify-js": "for filename in ./dist/src/js/*.js; do terser \"${filename}\" --compress --mangle --output \"${filename}\"; done",
     "dist": "npm run copy && npm run inline && npm run minify && npm run minify-js"
   },
   "repository": {
