@@ -3,16 +3,32 @@
   <head>
     <meta charset="utf-8">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <link rel="preconnect" href="https://crux.pazguille.me" />
     <link rel="preconnect" href="https://api.faviconkit.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
-    <link rel="shortcut icon" href="./assets/favicon.svg">
-    <link rel="apple-touch-icon" href="./assets/favicon.png">
+
+    <link rel="modulepreload" href="https://unpkg.com/redux@4.0.5/dist/redux.min.js">
+    <link rel="modulepreload" href="./src/js/app.js">
+    <link rel="modulepreload" href="./src/js/store.js">
+    <link rel="modulepreload" href="./src/js/templates.js">
+    <link rel="modulepreload" href="./src/js/Loading.js">
+    <link rel="modulepreload" href="./src/js/Leaderboard.js">
+    <link rel="modulepreload" href="./src/js/LeaderboardControl.js">
+    <link rel="modulepreload" href="./src/js/Filter.js">
+    <link rel="modulepreload" href="./src/js/ErrorMessage.js">
+
+    <link rel="shortcut icon" href="./src/assets/favicon.svg">
+    <link rel="apple-touch-icon" href="./src/assets/favicon.png">
     <meta name="apple-touch-fullscreen" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Web Vitals Leaderboard">
-    <meta name="description" content="Web Vitals Leaderboard is the simplest way to understand how your site’s user experience compares to other major sites in your industry.">
+    <meta name="description" content="Web Vitals Leaderboard is the simplest way to understand how your website’s performance compares to other sites in your industry.">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@pazguille" />
+    <meta name="twitter:title" content="Web Vitals Leaderboard" />
+    <meta name="twitter:description" content="The simplest way to understand how your website’s performance compares to other sites in your industry." />
+    <meta name="twitter:image" content="https://vitals-leaderboard.pazguille.me/src/assets/favicon.png" />
     <title>Web Vitals Leaderboard</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -39,7 +55,7 @@
       </footer>
     </section>
     <section class="results">
-      <img id="loading" class="loading" width="200" height="200" src="./assets/loading.gif" />
+      <img id="loading" class="loading" width="200" height="200" src="./src/assets/loading.gif" />
       <div id="filters" class="filters" hidden>
         <select id="device-filter" name="device">
           <option value="ALL_FORM_FACTORS">All devices</option>
@@ -82,16 +98,52 @@
         </thead>
         <tbody id="content"></tbody>
       </table>
-      <div class="disclaimer" hidden>
-        The data in the Chrome UX Report is a 28-day rolling average of aggregated metrics.
-        <br>
-        This means that the data presented in the Chrome UX Report at any given time is actually data for the past 28 days aggregated together.
-        <br>
-        Data is updated daily around 04:00 UTC. There is no SLO for update times; it is run on a best effort basis everyday.
-      </div>
     </section>
     <div class="copyright">Illustrations made by <a href="https://www.flaticon.com/authors/dinosoftlabs" target="_blank" rel="noopener noreferrer" title="DinosoftLabs">DinosoftLabs</a> and <a href="https://cliply.co/" target="_blank" rel="noopener noreferrer" title="Cliply.co">Cliply.co</a></div>
+
     <script src="./analytics.js"></script>
-    <script src="./app.js"></script>
+    <!-- <script> function ga(){};</script> -->
+    <!-- <script src="./app.js"></script> -->
+    <script>
+      window.requestIdleCallback = window.requestIdleCallback || function (cb) {
+        var start = Date.now();
+        return setTimeout(function () {
+          cb({
+            didTimeout: false,
+            timeRemaining: function () {
+              return Math.max(0, 50 - (Date.now() - start));
+            }
+          });
+        }, 1);
+      };
+      !function(){
+        var lastBtn = null;
+        document.addEventListener('click',function(e){
+            if (!e.target.closest) return;
+            lastBtn = e.target.closest('button, input[type=submit]');
+        }, true);
+        document.addEventListener('submit', function(e){
+            if ('submitter' in e) return;
+            var canditates = [document.activeElement, lastBtn];
+            for (var i=0; i < canditates.length; i++) {
+                var candidate = canditates[i];
+                if (!candidate) continue;
+                if (!candidate.form) continue;
+                if (!candidate.matches('button, input[type=button], input[type=image]')) continue;
+                e.submitter = candidate;
+                return;
+            }
+            e.submitter = e.target.querySelector('button, input[type=button], input[type=image]')
+        }, true);
+      }();
+    </script>
+    <script defer type="module" src="https://unpkg.com/redux@4.0.5/dist/redux.min.js"></script>
+    <script type="module" defer>
+      import bootApp from './src/js/app.js';
+      bootApp();
+      window.addEventListener('load', () => {
+        document.querySelector('#twitter').src = 'https://platform.twitter.com/widgets/tweet_button.html?url=%0A%0A%F0%9F%93%8A%20https%3A%2F%2Fvitals-leaderboard.pazguille.me&text=%E2%9A%A1%EF%B8%8FWeb%20Vitals%20Leaderboard!%0A%0AThe%20simplest%20way%20to%20understand%20how%20your%20website%E2%80%99s%20performance%20compares%20to%20other%20sites%20in%20your%20industry.';
+      });
+    </script>
   </body>
 </html>

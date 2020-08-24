@@ -27,7 +27,7 @@ function getSiteInfo(url) {
 <h5>${host.split('.')[1].toUpperCase()}</h5>
 <a href="${url}" class="url" target="_blank" rel="noopener noreferrer" title="${url}">${url}</a>
 </div>
-  `
+  `;
 }
 
 function template(site, position) {
@@ -117,7 +117,6 @@ const $deviceFilter = document.querySelector('#device-filter');
 const $connectionFilter = document.querySelector('#connection-filter');
 const $errorMessage = document.querySelector('#error-message');
 
-const formData = new FormData($form);
 $form.addEventListener('submit', function(eve) {
   eve.preventDefault();
   if (eve.submitter.id === 'add') {
