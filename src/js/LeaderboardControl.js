@@ -11,7 +11,7 @@ export default class LeaderboardControl {
 
   toggleDisabled() {
     const { leaderboardLoaded, urls } = store.getState();
-    if (leaderboardLoaded === false && urls.length === 1) {
+    if (leaderboardLoaded === false && urls.length >= 1) {
       this.$run.removeAttribute('disabled');
       this.$reset.removeAttribute('disabled');
       return;
