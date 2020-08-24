@@ -1,0 +1,1 @@
+import store from"./store.js";export default class Loading{constructor(){this.t=document.querySelector("#loading")}i(){const{o:t,s:i}=store.h();t?this.t.removeAttribute("hidden"):i&&this.t.setAttribute("hidden","hidden")}init(){store.subscribe(this.i.bind(this))}}

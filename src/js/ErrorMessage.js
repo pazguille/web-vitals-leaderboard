@@ -1,0 +1,1 @@
+import store from"./store.js";export default class ErrorMessage{constructor(){this.s=document.querySelector("#error-message")}t(){const{o:r,i:e}=store.h();r?this.s.removeAttribute("hidden"):e||this.s.setAttribute("hidden","hidden")}init(){store.subscribe(this.t.bind(this))}}
