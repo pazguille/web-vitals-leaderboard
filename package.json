@@ -1,6 +1,6 @@
 {
   "name": "web-vitals-leaderboard",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "The simplest way to understand how your site’s user experience compares to other major sites in your industry.",
   "main": "index.js",
   "scripts": {
