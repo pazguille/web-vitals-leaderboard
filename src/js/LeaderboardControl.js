@@ -41,7 +41,7 @@ export default class LeaderboardControl {
         });
 
       } else if (eve.submitter.id === 'run') {
-        store.dispatch({ type: 'RUN_LEADERBOARD' });
+        store.dispatch({ type: 'LEADERBOARD_UPDATE' });
 
         const { from, urls } = store.getState();
         const params = new URLSearchParams(`from=${from}&competitors=${urls.join(',')}`);

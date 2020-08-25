@@ -15,7 +15,7 @@ function leaderboard(state = {}, action) {
   const newState = { ...state };
 
   switch (action.type) {
-    case 'RUN_LEADERBOARD':
+    case 'LEADERBOARD_UPDATE':
       newState.running = true;
 
       if (action.urls) {
@@ -74,4 +74,9 @@ function leaderboard(state = {}, action) {
   }
 }
 
-export default Redux.createStore(leaderboard, initialState);
+const store = unistore(initialState);
+
+// Create a dispatch method like Redux
+store.dispatch = store.action(leaderboard);
+
+export default store;

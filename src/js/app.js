@@ -28,7 +28,7 @@ export default function bootApp() {
 
   if (params.has('competitors')) {
     store.dispatch({
-      type: 'RUN_LEADERBOARD',
+      type: 'LEADERBOARD_UPDATE',
       urls: params.get('competitors').split(','),
       from: params.get('from'),
     });
@@ -43,7 +43,7 @@ export default function bootApp() {
     });
   } else {
     store.dispatch({
-      type: 'RUN_LEADERBOARD',
+      type: 'LEADERBOARD_UPDATE',
       urls: demoUrls,
     });
   }
