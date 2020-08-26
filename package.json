@@ -25,6 +25,7 @@
     "html-inline": "^1.2.0",
     "html-minifier-terser": "^5.1.1",
     "replace-in-file": "^6.1.0",
+    "rev-hash": "^3.0.0",
     "serve": "^11.3.2",
     "terser": "^5.2.1"
   }
