@@ -1,0 +1,1 @@
+import store from"./store.1c7bd93aec.js";export default class Loading{constructor(){this.$node=document.querySelector("#loading")}toggleVisibility(){const{running:t,leaderboardLoaded:e}=store.getState();t?this.$node.removeAttribute("hidden"):e&&this.$node.setAttribute("hidden","hidden")}init(){store.subscribe(this.toggleVisibility.bind(this))}}
