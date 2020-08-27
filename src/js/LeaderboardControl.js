@@ -1,4 +1,4 @@
-import store from './store.js';
+// import store from './store.js';
 
 export default class LeaderboardControl {
   constructor() {
@@ -9,8 +9,8 @@ export default class LeaderboardControl {
     this.$reset = document.querySelector('#reset');
   }
 
-  toggleDisabled() {
-    const { leaderboardLoaded, urls } = store.getState();
+  async toggleDisabled() {
+    const { leaderboardLoaded, urls } = await store.getState();
     if (leaderboardLoaded === false && urls.length >= 1) {
       this.$run.removeAttribute('disabled');
       this.$reset.removeAttribute('disabled');

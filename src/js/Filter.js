@@ -1,4 +1,4 @@
-import store from './store.js';
+// import store from './store.js';
 
 export default class Filter {
   constructor() {
@@ -7,8 +7,8 @@ export default class Filter {
     this.$connection = document.querySelector('#connection-filter');
   }
 
-  toggleVisibility() {
-    const { leaderboardLoaded, running, leaderboardError } = store.getState();
+  async toggleVisibility() {
+    const { leaderboardLoaded, running, leaderboardError } = await store.getState();
     if (leaderboardLoaded && running) {
       this.$node.setAttribute('hidden', 'hidden');
       return;

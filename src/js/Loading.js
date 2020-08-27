@@ -1,12 +1,12 @@
-import store from './store.js';
+// import store from './store.js';
 
 export default class Loading {
   constructor() {
     this.$node = document.querySelector('#loading');
   }
 
-  toggleVisibility() {
-    const { running, leaderboardLoaded } = store.getState();
+  async toggleVisibility() {
+    const { running, leaderboardLoaded } = await store.getState();
     if (running) {
       this.$node.removeAttribute('hidden');
     } else if (leaderboardLoaded) {

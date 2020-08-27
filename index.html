@@ -8,9 +8,13 @@
     <link rel="preconnect" href="https://api.faviconkit.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
 
-    <link rel="preload" href="https://unpkg.com/unistore@3.5.2/dist/unistore.umd.js" as="script">
-    <link rel="modulepreload" href="./src/js/app.js">
+    <link rel="modulepreload" href="https://unpkg.com/comlink/dist/esm/comlink.mjs">
+
+    <link rel="modulepreload" href="./src/js/worker.js">
     <link rel="modulepreload" href="./src/js/store.js">
+    <link rel="modulepreload" href="https://unpkg.com/unistore@3.5.2/dist/unistore.es.js">
+
+    <link rel="modulepreload" href="./src/js/app.js">
     <link rel="modulepreload" href="./src/js/templates.js">
     <link rel="modulepreload" href="./src/js/Loading.js">
     <link rel="modulepreload" href="./src/js/Leaderboard.js">
@@ -31,8 +35,10 @@
     <meta name="twitter:image" content="https://vitals-leaderboard.pazguille.me/src/assets/favicon.png" />
     <title>Web Vitals Leaderboard</title>
     <link rel="stylesheet" href="./src/styles.css" />
+    <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-15753373-17', 'auto');ga('set', 'transport', 'beacon');ga('send', 'pageview');</script>
   </head>
   <body>
+    <div id="component-container"></div>
     <section class="heroo">
       <h1>Web Vitals Leaderboard</h1>
       <h2>Compare your speed against competitors</h2>
@@ -101,7 +107,6 @@
     </section>
     <div class="copyright">Illustrations made by <a href="https://www.flaticon.com/authors/dinosoftlabs" target="_blank" rel="noopener noreferrer" title="DinosoftLabs">DinosoftLabs</a> and <a href="https://cliply.co/" target="_blank" rel="noopener noreferrer" title="Cliply.co">Cliply.co</a></div>
     <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-15753373-17', 'auto');ga('set', 'transport', 'beacon');ga('send', 'pageview');
       window.requestIdleCallback = window.requestIdleCallback || function (cb) {
         var start = Date.now();
         return setTimeout(function () {
@@ -134,13 +139,46 @@
         }, true);
       }();
     </script>
-    <script defer src="https://unpkg.com/unistore@3.5.2/dist/unistore.umd.js"></script>
     <script type="module" defer>
+      import * as Comlink from 'https://unpkg.com/comlink/dist/esm/comlink.mjs';
       import bootApp from './src/js/app.js';
-      bootApp();
+
+      window.Comlink = Comlink;
+      Comlink.transferHandlers.set('IGNORE_FUNCTIONS', {
+        canHandle: (v) => v instanceof Function,
+        serialize: (v) => [0, []],
+        deserialize: () => 0,
+      });
+
+      async function wrapStore(store) {
+        const subscribers = new Set();
+        let latestState = await store.getState();
+        store.subscribe(
+          Comlink.proxy(async () => {
+            latestState = await store.getState();
+            subscribers.forEach(f => f());
+          })
+        );
+        return {
+          dispatch: action => store.dispatch(action),
+          getState: () => latestState,
+          subscribe: listener => {
+            subscribers.add(listener);
+            return () => subscribers.delete(listener);
+          },
+        };
+      }
+
+      async function init() {
+        const remoteStore = await Comlink.wrap(new Worker('./src/js/worker.js', { type: 'module' }));
+        window.store = await wrapStore(remoteStore);
+        bootApp();
+      }
+      init();
+
       window.addEventListener('load', () => {
         // Load Google Analytics
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
         // Load Twitte Button
         document.querySelector('#twitter').src = 'https://platform.twitter.com/widgets/tweet_button.html?url=%0A%0A%F0%9F%93%8A%20https%3A%2F%2Fvitals-leaderboard.pazguille.me&text=%E2%9A%A1%EF%B8%8FWeb%20Vitals%20Leaderboard!%0A%0AThe%20simplest%20way%20to%20understand%20how%20your%20website%E2%80%99s%20performance%20compares%20to%20other%20sites%20in%20your%20industry.';
       });

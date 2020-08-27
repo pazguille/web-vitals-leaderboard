@@ -1,4 +1,4 @@
-import store from './store.js';
+// import store from './store.js';
 import { resultTemplate, skeletonTemplate } from './templates.js';
 
 export default class LeaderboardResults {
@@ -46,8 +46,8 @@ export default class LeaderboardResults {
       })
   }
 
-  toggleVisibility() {
-    const { running, from, urls, filters, leaderboardLoaded, results } = store.getState();
+  async toggleVisibility() {
+    const { running, from, urls, filters, leaderboardLoaded, results } = await store.getState();
 
     if (running) {
       this.fetchData({
@@ -85,7 +85,7 @@ export default class LeaderboardResults {
   }
 
   init() {
-    store.subscribe(this.toggleVisibility.bind(this))
+    store.subscribe(this.toggleVisibility.bind(this));
   }
 }
 
