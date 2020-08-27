@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <link rel="preconnect" href="https://unpkg.com" />
     <link rel="preconnect" href="https://crux.pazguille.me" />
     <link rel="preconnect" href="https://api.faviconkit.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
 
-    <link rel="preload" href="https://unpkg.com/unistore@3.5.2/dist/unistore.umd.js" as="script">
     <link rel="modulepreload" href="./src/js/app.js">
     <link rel="modulepreload" href="./src/js/store.js">
+    <link rel="modulepreload" href="https://unpkg.com/unistore@3.5.2/dist/unistore.es.js">
     <link rel="modulepreload" href="./src/js/templates.js">
     <link rel="modulepreload" href="./src/js/Loading.js">
     <link rel="modulepreload" href="./src/js/Leaderboard.js">
@@ -54,6 +55,7 @@
         <iframe id="twitter" allowtransparency="true" frameborder="0" width="62" height="22" scrolling="no"></iframe>
       </footer>
     </section>
+    <div id="component-container"></div>
     <section class="results">
       <img id="loading" class="loading" width="200" height="200" src="./src/assets/loading.gif" />
       <div id="filters" class="filters" hidden>
@@ -134,7 +136,6 @@
         }, true);
       }();
     </script>
-    <script defer src="https://unpkg.com/unistore@3.5.2/dist/unistore.umd.js"></script>
     <script type="module" defer>
       import bootApp from './src/js/app.js';
       bootApp();

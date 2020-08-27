@@ -1,3 +1,5 @@
+import unistore from 'https://unpkg.com/unistore@3.5.2/dist/unistore.es.js';
+
 const initialState = {
   urls: [],
   from: 'urls',
