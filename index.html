@@ -35,8 +35,11 @@
   </head>
   <body>
     <section class="heroo">
-      <h1>Web Vitals Leaderboard</h1>
-      <h2>Compare your speed against competitors</h2>
+      <header>
+        <h3>Compare your speed against competitors</h3>
+        <h1><span>Web Vitals</span> Leaderboard</h1>
+        <h2>The simplest way to understand how your website’s performance compares to other sites in your industry.</h2>
+      </header>
       <form action="/" method="GET">
         <select id="from" name="from">
           <option value="urls" selected>URL</option>
@@ -47,7 +50,7 @@
         </label>
         <button id="add" type="submit" name="action" value="add">Add</button>
         <br/><br/>
-        <button id="run" type="submit" name="action" value="run" disabled>⚡️ Run</button>
+        <button id="run" type="submit" name="action" value="run" disabled>⚡️ View Results</button>
         <button id="reset" type="reset" name="action" disabled>Reset</button>
       </form>
       <footer>
