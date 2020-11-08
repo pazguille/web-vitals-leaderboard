@@ -6,6 +6,7 @@ body {
   text-align: center;
   min-height: 100vh;
   color: #333333;
+  font-size: 16px;
 }
 
 abbr {
@@ -40,23 +41,39 @@ h3 {
   font-weight: 400;
 }
 
-
-button, select {
-  font-size: 15px;
+input,
+select,
+button {
+  display: inline-block;
+  vertical-align: middle;
   border: 1px solid transparent;
+}
+
+select {
+  appearance: none;
+  border: none;
+  padding: 0.6em 1.2em;
+  color: #333333;
+  font-size: 16px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23322241'><polygon points='0,0 100,0 50,50'/></svg>");
+  background-size: 12px;
+  background-position: 95% .9em;
+  background-repeat: no-repeat;
+}
+
+button {
+  font-size: 16px;
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 3px;
-  display: inline-block;
   height: auto;
   line-height: 23px;
   text-decoration: none;
   white-space: nowrap;
-  vertical-align: middle;
   box-sizing: border-box;
-}
-
-button {
   padding: 0.5em 1em;
   background-color: #322241;
   border-color: #664584;
@@ -68,12 +85,6 @@ button[type="reset"] {
   border-color: #664584;
 }
 
-select {
-  padding: 0.6em 1em;
-  border-color: #D4D4D4;
-  color: #333333;
-}
-
 button[disabled] {
   background-color: #251931;
   border-color: #322241;
@@ -82,28 +93,65 @@ button[disabled] {
 }
 
 input[type="url"] {
-  padding: 10px;
-  border: 1px solid #D4D4D4;
+  border-left-color: #D4D4D4;
   color: #333333;
-  border-radius: 3px;
-  font-size: 16px;
-  vertical-align: middle;
+  font-size: 18px;
+  height: 58px;
+  text-align: 58px;
+  padding: 0 20px;
+}
+
+:focus {
+  outline-color: #664584;
+}
+
+button:focus,
+input:focus,
+select:focus {
+  outline: 0;
+  box-shadow: 0 0 10px 5px #664584;
 }
 
 .heroo {
   background-color: #2B2B52;
   color: lightgray;
-  padding: 20px 0px;
+  padding: 20px 0px 150px;
 }
 
 .heroo a {
   color: lightgray;
 }
 
+.primary-controls {
+  background-color: white;
+  box-shadow: 0px 3px 24px rgba(0, 0, 0, 0.36);
+  border-radius: 32px;
+  max-width: 700px;
+  padding: 5px 0;
+  margin: 0 auto;
+}
+
+.add-button {
+  width: 58px;
+  height: 58px;
+  border-radius: 100%;
+  border: none;
+  padding: 0;
+  position: relative;
+  right: -3px;
+}
 
 .results {
   position: relative;
-  margin-bottom: 60px;
+  top: -120px;
+  padding: 10px 0 30px;
+
+  box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  background: white;
+  max-width: 95%;
+  margin: 0 auto;
+}
 }
 
 .loading {
@@ -115,15 +163,14 @@ input[type="url"] {
 }
 
 .filters {
-  margin: 20px 0 15px;
+  margin: 15px 0;
 }
 
 table {
   border-spacing: 0;
   border-collapse: collapse;
   margin: 30px auto 10px;
-  font-size: 13px;
-  width: 80%;
+  width: 90%;
 }
 
 tbody {
@@ -139,15 +186,13 @@ tbody tr:nth-child(even) {
 }
 
 th {
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   padding: 5px 0 15px;
 }
 
 td {
   padding: 1rem 1rem 1rem 2rem;
-  border: solid #dcdde1;
-  border-width: 1px 0;
 }
 
 .logo {
@@ -163,13 +208,12 @@ td {
 
 .site h5 {
   margin: 0 0 3px;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .url {
   white-space: nowrap;
   max-width: 400px;
-  font-size: 14px;
   text-overflow: ellipsis;
   overflow: hidden;
   display: block;
@@ -199,6 +243,7 @@ td {
   border-style: inset;
   text-align: right;
   font-size: 15px;
+  border: 3px solid white !important;
 }
 
 .fast {
@@ -258,10 +303,6 @@ footer {
 
   td {
     padding: .8rem;
-  }
-
-  table {
-    width: 98%;
   }
 
   .site {
