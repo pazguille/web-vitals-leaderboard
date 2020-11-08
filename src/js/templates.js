@@ -30,13 +30,13 @@ export function resultTemplate(site, position) {
   const cls = site.metrics.CLS && site.metrics.CLS.value || '-';
 
   return (`
-<tr>
-<td class="ranking rank-${position}">${positions[position-1] || position}</td>
-<td>${getSiteInfo(url)}</td>
-<td class="${healthy.FCP(fcp)}">${fcp}s</td>
-<td class="${healthy.LCP(lcp)}">${lcp}s</td>
-<td class="${healthy.FID(fid)}">${fid}ms</td>
-<td class="${healthy.CLS(cls)}">${cls}</td>
+<tr tabindex="0">
+<td class="ranking rank-${position}" tabindex="0">${positions[position-1] || position}</td>
+<td tabindex="0">${getSiteInfo(url)}</td>
+<td class="${healthy.FCP(fcp)}" tabindex="0">${fcp}s</td>
+<td class="${healthy.LCP(lcp)}" tabindex="0">${lcp}s</td>
+<td class="${healthy.FID(fid)}" tabindex="0">${fid}ms</td>
+<td class="${healthy.CLS(cls)}" tabindex="0">${cls}</td>
 </tr>
 `);
 }
