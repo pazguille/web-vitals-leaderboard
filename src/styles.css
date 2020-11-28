@@ -37,10 +37,6 @@ h2 {
   padding: 0 10px;
 }
 
-h3 {
-  font-weight: 400;
-}
-
 input,
 select,
 button {
@@ -120,6 +116,10 @@ select:focus {
 
 .heroo a {
   color: lightgray;
+}
+
+.heroo h3 {
+  font-weight: 400;
 }
 
 .primary-controls {
@@ -271,6 +271,41 @@ hr {
   border-top: 1px solid #f5f5f5;
 }
 
+.faq {
+  position: relative;
+  top: -50px;
+  padding: 10px 50px 30px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+}
+
+.faq h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.faq details {
+  display: inline-block;
+  text-align: left;
+  width: 49%;
+  vertical-align: top;
+  margin: 20px 0;
+}
+
+.faq summary {
+  font-size: 18px;
+  font-weight: 300;
+  margin: 10px 0;
+}
+
+.faq p {
+  color: #616161;
+  font-size: 14px;
+  line-height: 1.6em;
+  margin: 0;
+  width: 75%;
+}
+
 footer {
   margin-top: 20px;
   font-size: 12px;
@@ -305,8 +340,15 @@ footer {
     padding: .8rem;
   }
 
+  table th:nth-child(1),
+  .ranking,
   .site {
     display: none;
+  }
+
+  .faq details,
+  .faq p {
+    width: 100%;
   }
 
   input[type="url"] {
