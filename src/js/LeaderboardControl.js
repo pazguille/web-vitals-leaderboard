@@ -44,7 +44,8 @@ export default class LeaderboardControl {
         store.dispatch({ type: 'LEADERBOARD_UPDATE' });
 
         const { from, urls } = store.getState();
-        const params = new URLSearchParams(`from=${from}&competitors=${urls.join(',')}`);
+        const encodedUrls = urls.map((url) => encodeURIComponent(url)).join(',');
+        const params = new URLSearchParams(`from=${from}&competitors=${encodedUrls}`);
         window.history.replaceState({}, '', `${location.pathname}?${params}`);
 
         ga('send', {
@@ -68,4 +69,3 @@ export default class LeaderboardControl {
     store.subscribe(this.toggleDisabled.bind(this))
   }
 }
-
