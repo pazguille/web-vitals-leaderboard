@@ -1,6 +1,6 @@
 const positions = ['🥇', '🥈', '🥉'];
 const healthy = {
-  FCP: (value) => value <= 1 ? 'fast' : (value >= 2 ? 'fail' : 'average'),
+  FCP: (value) => value <= 1.8 ? 'fast' : (value >= 3 ? 'fail' : 'average'),
   LCP: (value) => value <= 2.5 ? 'fast' : (value >= 4 ? 'fail' : 'average'),
   FID: (value) => value <= 100 ? 'fast' : (value >= 300 ? 'fail' : 'average'),
   CLS: (value) => value <= 0.1 ? 'fast' : (value >= 0.25 ? 'fail' : 'average'),
