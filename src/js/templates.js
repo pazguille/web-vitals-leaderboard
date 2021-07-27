@@ -11,7 +11,7 @@ function getSiteInfo(url) {
   return `
 <img class="logo" width="32" height="32" src="${`https://api.faviconkit.com/${host}/144`}" alt="${url}"/>
 <div class="site">
-<h5>${host.split('.')[1].toUpperCase()}</h5>
+<strong>${host.split('.')[1].toUpperCase()}</strong>
 <a href="${url}" class="url" target="_blank" rel="noopener noreferrer" title="${url}">${url}</a>
 </div>
   `
