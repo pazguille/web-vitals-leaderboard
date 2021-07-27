@@ -151,7 +151,9 @@ select:focus {
   background: white;
   max-width: 95%;
   margin: 0 auto;
-}
+
+  min-height: 170px;
+  z-index: 1;
 }
 
 .loading {
@@ -206,7 +208,7 @@ td {
   min-width: 300px;
 }
 
-.site h5 {
+.site strong {
   margin: 0 0 3px;
   font-size: 12px;
 }
