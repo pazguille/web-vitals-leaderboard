@@ -1,10 +1,10 @@
 {
   "name": "web-vitals-leaderboard",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "The simplest way to understand how your site’s user experience compares to other major sites in your industry.",
   "main": "index.js",
   "scripts": {
-    "start": "serve -p 3030",
+    "dev": "serve -p 3030",
     "inline": "html-inline --ignore-images --ignore-links --ignore-scripts -i ./index.html -o ./dist/index.html",
     "minify": "html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js '{\"compress\":{\"drop_console\":\"true\"},\"mangle\":{\"toplevel\":\"true\"}}' --output ./dist/index.html ./dist/index.html",
     "copy": "rm -rf dist && mkdir -p dist && cp -rf ./src ./dist/src",
