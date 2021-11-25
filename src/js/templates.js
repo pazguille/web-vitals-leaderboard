@@ -9,7 +9,7 @@ const healthy = {
 function getSiteInfo(url) {
   const { host } = new URL(url);
   return `
-<img class="logo" width="32" height="32" src="${`https://api.faviconkit.com/${host}/144`}" alt="${url}"/>
+<img class="logo" width="32" height="32" src="${`https://icons.duckduckgo.com/ip2/${host}.ico`}" alt="${url}"/>
 <div class="site">
 <strong>${host.split('.')[1].toUpperCase()}</strong>
 <a href="${url}" class="url" target="_blank" rel="noopener noreferrer" title="${url}">${url}</a>
