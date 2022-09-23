@@ -1,7 +1,7 @@
 # Web Vitals Leaderboard
 > The simplest way to understand how your site’s user experience compares to other major sites in your industry.
 
-⚡️ https://vitals-leaderboard.pazguille.me/
+⚡️ https://web-vitals.pazguille.me/
 
 ## Development
 
