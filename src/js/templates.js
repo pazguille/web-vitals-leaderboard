@@ -3,6 +3,7 @@ const healthy = {
   FCP: (value) => value <= 1.8 ? 'fast' : (value >= 3 ? 'fail' : 'average'),
   LCP: (value) => value <= 2.5 ? 'fast' : (value >= 4 ? 'fail' : 'average'),
   FID: (value) => value <= 100 ? 'fast' : (value >= 300 ? 'fail' : 'average'),
+  INP: (value) => value <= 200 ? 'fast' : (value >= 500 ? 'fail' : 'average'),
   CLS: (value) => value <= 0.1 ? 'fast' : (value >= 0.25 ? 'fail' : 'average'),
 };
 
@@ -18,7 +19,7 @@ function getSiteInfo(url) {
 }
 
 export function resultTemplate(site, position) {
-  const url = site.origin || site.url;
+  const url = site.origin || site.url;
 
   if (site.metrics === null) {
     return noDataTemplate(url, site.error);
@@ -28,6 +29,7 @@ export function resultTemplate(site, position) {
   const lcp = site.metrics.LCP && (site.metrics.LCP.value/1000).toFixed(2) || '-';
   const fid = site.metrics.FID && site.metrics.FID.value || '-';
   const cls = site.metrics.CLS && site.metrics.CLS.value || '-';
+  const inp = site.metrics.INP && site.metrics.INP.value || '-';
 
   return (`
 <tr tabindex="0">
@@ -37,6 +39,7 @@ export function resultTemplate(site, position) {
 <td class="${healthy.LCP(lcp)}" tabindex="0">${lcp}s</td>
 <td class="${healthy.FID(fid)}" tabindex="0">${fid}ms</td>
 <td class="${healthy.CLS(cls)}" tabindex="0">${cls}</td>
+<td class="${healthy.INP(inp)}" tabindex="0">${inp}</td>
 </tr>
 `);
 }
@@ -46,6 +49,7 @@ export function skeletonTemplate(url) {
 <tr>
 <td class="ranking">-</td>
 <td>${getSiteInfo(url)}</td>
+<td>-</td>
 <td>-</td>
 <td>-</td>
 <td>-</td>
