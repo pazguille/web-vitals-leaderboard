@@ -33,13 +33,13 @@ export function resultTemplate(site, position) {
 
   return (`
 <tr tabindex="0">
-<td class="ranking rank-${position}" tabindex="0">${positions[position-1] || position}</td>
+<td class="ranking rank-${position}" tabindex="0">${positions[position-1] || position}</td>
 <td tabindex="0">${getSiteInfo(url)}</td>
 <td class="${healthy.FCP(fcp)}" tabindex="0">${fcp}s</td>
 <td class="${healthy.LCP(lcp)}" tabindex="0">${lcp}s</td>
 <td class="${healthy.FID(fid)}" tabindex="0">${fid}ms</td>
 <td class="${healthy.CLS(cls)}" tabindex="0">${cls}</td>
-<td class="${healthy.INP(inp)}" tabindex="0">${inp}</td>
+<td class="${healthy.INP(inp)}" tabindex="0">${inp}ms</td>
 </tr>
 `);
 }
