@@ -4,7 +4,6 @@ export default class Filter {
   constructor() {
     this.$node = document.querySelector('#filters');
     this.$device = document.querySelector('#device-filter');
-    this.$connection = document.querySelector('#connection-filter');
   }
 
   toggleVisibility() {
@@ -32,14 +31,6 @@ export default class Filter {
         value: this.value,
       });
     });
-
-    this.$connection.addEventListener('change', function() {
-      store.dispatch({
-        type: 'CHANGE_CONNECTION',
-        value: this.value,
-      });
-    });
-
   }
 
   init() {
@@ -47,4 +38,3 @@ export default class Filter {
     store.subscribe(this.toggleVisibility.bind(this))
   }
 }
-

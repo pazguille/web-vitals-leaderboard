@@ -9,7 +9,6 @@ const initialState = {
   leaderboardError: false,
   filters: {
     device: 'PHONE',
-    connection: '4G',
   }
 };
 
@@ -39,12 +38,6 @@ function leaderboard(state = {}, action) {
       newState.running = true;
       newState.results = null;
       newState.filters.device = action.value;
-      return newState;
-
-    case 'CHANGE_CONNECTION':
-      newState.running = true;
-      newState.results = null;
-      newState.filters.connection = action.value;
       return newState;
 
     case 'CHANGE_FROM':
