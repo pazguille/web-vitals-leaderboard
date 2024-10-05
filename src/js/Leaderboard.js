@@ -53,7 +53,6 @@ export default class LeaderboardResults {
       this.fetchData({
         [from]: urls,
         device: filters.device,
-        connection: filters.connection,
       });
       this.$node.setAttribute('hidden', 'hidden');
       return;
@@ -88,4 +87,3 @@ export default class LeaderboardResults {
     store.subscribe(this.toggleVisibility.bind(this))
   }
 }
-
