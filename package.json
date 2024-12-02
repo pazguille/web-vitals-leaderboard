@@ -27,6 +27,6 @@
     "replace-in-file": "^6.2.0",
     "rev-hash": "^3.0.0",
     "serve": "^11.3.2",
-    "terser": "^5.7.1"
+    "terser": "^5.14.2"
   }
 }
